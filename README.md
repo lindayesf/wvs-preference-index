@@ -207,13 +207,13 @@ And a boolean flag `balanced_panel`.
 For each wave $w$ and index $j$, the script also outputs the ordinary sample variance
 across countries (pandas default `var`, i.e. `ddof=1`):
 
-$$
+```math
 \mathrm{Var}^{(unw)}_{w,j}
 =
 \frac{1}{N_{w,j}-1}
 \sum_{c\in\mathcal{C}_{w,j}}
 \left(x_c-\bar{x}_{w,j}\right)^2
-$$
+```
 
 where $\mathcal{C}_{w,j}$ is the set of countries with non-missing $I_{c,w,j}$ and
 $N_{w,j}=|\mathcal{C}_{w,j}|$.
