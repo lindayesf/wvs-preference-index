@@ -1,0 +1,10 @@
+data/*.csv
+data/*.dta
+data/*.zip
+__pycache__/
+.DS_Store
+
+.venv/
+.python_packages/
+.matplotlib_cache/
+.mplconfig/
