@@ -158,13 +158,13 @@ If a variable value is one of the standard missing codes (`-1`, `-2`, `-3`, `-4`
 
 ### Ordinal wave z-score
 
-For a respondent-level value `x_{r,v}` for question `v` in wave `w`, the score is standardized within wave:
+For each retained ordinal question `q` in wave `w`, with respondent `r` in country `c` and survey year `t`:
 
 $$
-z_{r,v} = \frac{x_{r,v} - \mu_{w,v}}{\sigma_{w,v}}
+z_{r,q,w,c,t} = \frac{x_{r,q,w,c,t} - \mu_{w,q,t}}{\sigma_{w,q,t}}
 $$
 
-If a variable is in the reverse-coding map, the sign is flipped before aggregation.
+where $\mu_{w,q,t}$ and $\sigma_{w,q,t}$ are the sample mean and sample standard deviation of question `q` in wave `w` using pandas defaults (`ddof=1`, Bessel's correction). If a question is in the reverse-coding map, the sign is flipped before aggregation.
 
 ### Categorical indicator logic
 
@@ -172,7 +172,7 @@ Categorical variables are not treated as raw values in the final build. Instead,
 
 ### Domain index construction
 
-For each retained respondent and each domain (`all`, `imf`, `idawb`, `unsc`), the final index is the average of the available standardized variable scores for that respondent in that domain.
+For each retained respondent and each domain (`all`, `imf`, `idawb`, `unsc`), the final index is the average of the available standardized question scores for that respondent in that domain.
 
 ### Country-wave-year collapse
 
@@ -182,22 +182,25 @@ After the respondent-level index is computed, the data are collapsed to country-
 
 For each $(w,j,g)$ row, the script also stores:
 
-$$
-n\_countries = |\mathcal{C}_{w,j,g}|
-$$
-
-$$
-	{top1\_share}
+```math
+\mathrm{n\_countries}
 =
-\max_{c\in\mathcal{C}_{w,j,g}}
-\frac{q_c}{\sum_{k\in\mathcal{C}_{w,j,g}} q_k}
-$$
+\left|\mathcal{C}_{w,j,g}\right|
+```
+
+```math
+\mathrm{top1\_share}
+=
+\max_{c \in \mathcal{C}_{w,j,g}}
+\frac{q_c}
+{\sum_{k \in \mathcal{C}_{w,j,g}} q_k}
+```
 
 So `top1_share` is the GDP share of the largest-weight country in that
 wave/index/weighting-year calculation; higher values mean the weighted variance
 is more concentrated in one country.
 
-and a boolean flag `balanced_panel`.
+And a boolean flag `balanced_panel`.
 
 ### 6) Unweighted baseline variance by wave (implemented in main production build)
 
