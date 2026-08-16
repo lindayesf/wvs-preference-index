@@ -215,8 +215,7 @@ across countries (pandas default `var`, i.e. `ddof=1`):
 \left(x_c-\bar{x}_{w,j}\right)^2
 ```
 
-where $\mathcal{C}_{w,j}$ is the set of countries with non-missing $I_{c,w,j}$ and
-$N_{w,j}=|\mathcal{C}_{w,j}|$.
+where $`\mathcal{C}_{w,j}`$ is the set of countries with non-missing $`I_{c,w,j}`$ and $`N_{w,j} = |\mathcal{C}_{w,j}|`$.
 
 ### 7) Output Files from "Re-evaluation" Check
 
